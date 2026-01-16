@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+        .card{
+            height: 20vh;
+            width: 20%;
+            box-shadow: 2px 2px 20px gray;
+            /* display: inline-flex; */
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            left: 40%;
+        }
+        @media(max-width:720px){
+           .card{
+            width: 100%;
+            left: 0%;
+           }
+        }
+        .opt{
+            width: 100%;
+            height: 20%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.5s;
+            box-shadow: 1px 1px 5px gray;
+        }
+        .opt:hover{
+            width: 100%;
+            height: 20%;
+            display: inline-flex;
+            align-items: center;
+            background: gray;
+            transform: translate(20px);
+            color: black;
+            justify-content: center;
+            box-shadow: 1px 1px 5px gray;
+            cursor: pointer;
+        }
+        .title{
+            color: white;
+            margin: 20px;
+        }
+
+        .row{
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 20px;
+            /* overflow: hidden;
+            height: 25vh;
+            width: 20%; */
+            /* align-items: center;
+            justify-content: flex-start;
+            position: absolute;
+            left: 40%;
+            box-shadow: 2px 2px 10px gray; */
+        }
+        .row img {
+            width: 140PX;
+            height: 200PX;
+            margin-right: 12px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .row img:hover{
+            transform: scale(1.1);
+        }
+        .row::-webkit-scrollbar {
+            display: none;
+        }
+        /* #scrgt{
+            width: 10%;
+            height: 5vh;
+            position: relative;
+            left: 45%;
+            top: 32vh; */
+            /* color: black; */
+            /* background: none;
+            border: none;
+            box-shadow: 0px 0px 50px gray;
+        } */
+    </style>
+</head>
+
+<body bgcolor="black">
+    <CENTER>
+        <br><br>
+        <font color="white" size="6px">ANIME </font>
+        <font size="6px" color="red">UNLOCKED </font><img src="images-removebg-preview.png" height="30px" alt=""
+            style="transform: rotate(20deg);"><br><br><br>
+        <div class="a1"><button id="b1"
+                style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 7vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction: column; gap: .5vh;">
+                <div style="width: 80%; height: .3vh; background-color: white; border-radius: .5vh;"></div>
+                <div style="width: 80%; height: .3vh; background-color: white; border-radius: .5vh;"></div>
+                <div style="width: 80%; height: .3vh; background-color: white; border-radius: .5vh;"></div>
+            </button></div>
+    </CENTER>
+    <div class="card">
+        <div class="opt">HOME </div>
+        <div class="opt">SEARCH</div>
+        <div class="opt">NEWS</div>
+        <div class="opt">PROFIL</div>
+        <div class="opt">HELP</div>
+    </div>
+
+    <h2 class="title">Top Airing</h2>
+    <div class="row">
+        <img src="jjk.jpg" id="im1" style="cursor: pointer;">
+        <img src="mha.jpg" id="im2" style="cursor: pointer;">
+        <img src="mf.jpg" id="im3" style="cursor: pointer;">
+        <img src="ds.jpg" id="im4" style="cursor: pointer;">
+        <img src="opm.jpg" id="im5" style="cursor: pointer;">
+        <img src="s x f.jpg" id="im6" style="cursor: pointer;">
+        <img src="naruto.jpg" id="im7" style="cursor: pointer;">
+        <img src="boruto.jpg" id="im8" style="cursor: pointer;">
+        <img src="tog.jpg" id="im9" style="cursor: pointer;">
+        <img src="bc.jpg" id="im10" style="cursor: pointer;">
+        <img src="bh.jpg" id="im11" style="cursor: pointer;">
+        <img src="ff.jpg" id="im12" style="cursor: pointer;">
+       
+    </div>
+    
+    <h2 class="title">Most Favorite</h2>
+    <div class="row">
+        <img src="naruto.jpg"id="im13" style="cursor: pointer;">
+        <img src="op.jpg" id="im14" style="cursor: pointer;">
+        <img src="db.jpg"id="im15" style="cursor: pointer;">
+        <img src="tg.jpg" id="im16" style="cursor: pointer;">
+        <img src="dn.jpg"id="im17" style="cursor: pointer;">
+        <img src="bleach.jpg"id="im18" style="cursor: pointer;">
+        <img src="cm.jpg"id="im19" style="cursor: pointer;">
+        <img src="bl.jpg"id="im20" style="cursor: pointer;">
+        <img src="haiykuu.jpg"id="im21" style="cursor: pointer;">
+        <img src="solo level.jpg"id="im22" style="cursor: pointer;">
+        <img src="mmm.jpg"id="im23" style="cursor: pointer;">
+        <img src="jl.jpg"id="im24" style="cursor: pointer;">
+       
+    </div>
+    <h2 class="title">Top Movie</h2>
+    <div class="row">
+        <img src="iweyp.jpg"id="im25" style="cursor: pointer;">
+        <img src="wy.jpg"id="im26" style="cursor: pointer;">
+        <img src="sv.jpg"id="im27" style="cursor: pointer;">
+        <img src="yn.jpg"id="im28" style="cursor: pointer;">
+        <img src="cmm.jpg"id="im29" style="cursor: pointer;">
+        <img src="dsm.jpg"id="im30" style="cursor: pointer;">
+        <img src="suz.jpg"id="im31" style="cursor: pointer;">
+        <img src="sd.jpg"id="im32" style="cursor: pointer;">
+        <img src="ylia.jpg"id="im33" style="cursor: pointer;">
+        <img src="lb.jpg"id="im34" style="cursor: pointer;">
+        <img src="teyilb.jpg"id="im35" style="cursor: pointer;">
+        <img src="kaiju.jpg"id="im36" style="cursor: pointer;">
+       <br>
+    </div>
+    <h2 class="title">Most Popular</h2>
+    <div class="row">
+        <img src="aot.jpg" id="im37" style="cursor: pointer;">
+        <img src="hxh.jpg" id="im38" style="cursor: pointer;">
+        <img src="naruto.jpg" id="im39" style="cursor: pointer;">
+        <img src="op.jpg" id="im40" style="cursor: pointer;">
+        <img src="ds.jpg" id="im41" style="cursor: pointer;">
+        <img src="mha.jpg" id="im42" style="cursor: pointer;">
+        <img src="bleach.jpg" id="im43" style="cursor: pointer;">
+        <img src="db.jpg" id="im44" style="cursor: pointer;">
+        <img src="wb.jpg" id="im45" style="cursor: pointer;">
+        <img src="tokyo.jpg" id="im46" style="cursor: pointer;">
+        <img src="gachiakuta.jpg" id="im47" style="cursor: pointer;">
+        <img src="frieren.jpg" id="im48" style="cursor: pointer;">
+       
+    </div>
+    
+   
+    <script>
+      
+        document.getElementById("b1").addEventListener("click",()=>{
+            let c1 = document.querySelector(".card");
+            if(c1.style.display=="none"){
+                c1.style.display="flex";
+            }
+            else{
+                c1.style.display="none";
+            }
+        });  
+    //    opening new tab file to click onimage 
+    document.getElementById("im1").addEventListener("click",()=>{
+        window.open("im1.html","_self");
+    })
+    document.getElementById("im2").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im3").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im4").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im5").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im6").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im7").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im8").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im9").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im10").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im11").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im12").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im13").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im14").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im15").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im16").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im17").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im18").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im19").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im20").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im21").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im22").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im23").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im24").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im25").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im26").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im27").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im28").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im29").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im30").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im31").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im32").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im33").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im34").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im35").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im36").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im37").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im38").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im39").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im40").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im41").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im42").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im43").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im44").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im45").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im46").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im47").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    document.getElementById("im48").addEventListener("click",()=>{
+        window.open("im2.html","_self");
+    })
+    
+        
+    </script>
+</body>
+
+</html>

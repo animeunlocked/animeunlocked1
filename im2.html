@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+         .sct-1mysec{
+            position: absolute;
+            width: 15%;
+            height: 50vh;
+            display:none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: linear-gradient(30deg,rgba(128, 128, 128, 0.295),rgba(211, 211, 211, 0.233));
+            border-radius: 1vh;
+            border: 1px solid black;
+            box-shadow: 0px 0px 20px rgba(211, 211, 211, 0.281);
+            left: 26%;
+            top: 64.5vh;
+        }
+        .opt{
+            width: 100%;
+            height: 4%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: clamp(0.5vh, 1.5vh, 5vh);
+            color: gray;
+            box-shadow: 0px 0px 1px black;
+            transition: .5s;
+        }
+        .opt:hover{
+            width: 100%;
+            height: 4%;
+            transform: translate(10px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: clamp(0.5vh, 1.5vh, 5vh);
+            color:black;
+            border-radius: 1vh;
+            box-shadow: 0px 0px 1px black;
+            cursor: pointer;
+        }
+    </style>
+    </style>
+</head>
+
+<body bgcolor="black" text="white">
+    <br><br><br>
+    <p style="text-wrap: wrap ;">
+        <img src="mha.jpg" alt="">
+    <h1>My Hero Academia</h1><br>
+
+   My Hero Academia is a popular superhero anime set in a world where most people are born with special powers called Quirks. The story follows Izuku Midoriya, a Quirkless boy who dreams of becoming a hero and inherits the power of the world’s greatest hero, All Might. He trains at U.A. High School, facing powerful villains while learning what it truly means to be a hero.
+   </p>
+    <div style="width: 50%; height: 15vh;display: inline-flex; align-items:center; justify-content: space-around;">
+        
+        <button id="season1" 
+            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
+            1</button>
+            <section class="sct-1mysec" id="section1" >
+                <div class="opt" id="opn1">Episode-1</div>
+                <div class="opt" id="opn2">Episode-2</div>
+                <div class="opt" id="opn3">Episode-3</div>
+                <div class="opt" id="opn4">Episode-4</div>
+                <div class="opt" id="opn5">Episode-5</div>
+                <div class="opt" id="opn6">Episode-6</div>
+                <div class="opt" id="opn7">Episode-7</div>
+                <div class="opt" id="opn8">Episode-8</div>
+                <div class="opt" id="opn9">Episode-9</div>
+                <div class="opt" id="opn10">Episode-10</div>
+                <div class="opt" id="opn11">Episode-11</div>
+                <div class="opt" id="opn12">Episode-12</div>
+                <div class="opt" id="opn13">Episode-13</div>
+               
+                 </section>
+        <button
+            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
+            2</button>
+       <button
+            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
+            3 </button><br><br>
+       <button
+            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
+            4 </button>
+       <button
+            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
+            5 </button>
+       <button
+            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
+            6 </button><br><br>
+       <button
+            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
+            7 </button>
+             <script>
+        document.getElementById("season1").addEventListener("click",()=>{
+            let a = document.getElementById("section1");
+            if(a.style.display=="none"){
+                a.style.display="flex";
+            }else{
+                a.style.display="none";
+            }
+        })
+        
+
+    </script>
+</body>
+
+</html>
