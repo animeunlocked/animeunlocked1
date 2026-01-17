@@ -1,203 +1,484 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anime Player UI</title>
+
+<style>
+:root{
+  --bg:#000;
+  --card:#2a2a2a;
+  --accent:#ff5a3c;
+  --muted:#9a9a9a;
+  --white:#fff;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+}
+
+/* HEADER BANNER */
+.hero{
+  position:relative;
+  height:240px;
+  background:url("https://wallpaperaccess.com/full/8491797.jpg") center/cover no-repeat;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.2), #000 90%);
+}
+
+/* CONTENT */
+.container{
+  padding:16px;
+  margin-top:-40px;
+  position:relative;
+  z-index:2;
+}
+
+.title{
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.tags{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+.tag{
+  background:#1c1c1c;
+  padding:6px 14px;
+  border-radius:18px;
+  font-size:13px;
+}
+
+/* SYNOPSIS */
+.section{
+  margin-top:16px;
+}
+.section h3{
+  font-size:18px;
+  margin-bottom:6px;
+}
+.synopsis{
+  background:#1c1c1c;
+  padding:14px;
+  border-radius:10px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* SEASON BAR */
+.season-bar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:18px;
+}
+select{
+  background:#1c1c1c;
+  color:#ff5a3c;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
+  flex:1;
+}
+.search{
+  width:100%;
+  margin-top:10px;
+}
+.search input{
+  width:100%;
+  background:#1c1c1c;
+  border:none;
+  padding:12px 14px;
+  border-radius:10px;
+  color:#fff;
+  outline:none;
+}
+
+/* EPISODES */
+.episodes{
+  margin-top:16px;
+}
+.episode{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#3a3a3a;
+  border-radius:12px;
+  padding:12px 14px;
+  margin-bottom:12px;
+}
+.play{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.play-btn{
+  width:34px;
+  height:34px;
+  background:var(--accent);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.play-btn::before{
+  content:"▶";
+  color:#000;
+  font-size:14px;
+  margin-left:2px;
+}
+.ep-title{
+  font-size:16px;
+}
+.download{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#555;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+/* BOTTOM NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:64px;
+  background:#0c0c0c;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  border-top:1px solid #222;
+}
+.nav i{
+  font-size:22px;
+  color:#aaa;
+}
+.nav .active{
+  color:var(--accent);
+}
+</style>
 </head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Netflix-Style Episodes Slider</title>
-  <style>
-    body {
-      background-color: #141414;
-      color: white;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 40px 4% 100px;
-    }
 
-    .row-title {
-      font-size: 1.4vw;
-      font-weight: bold;
-      margin-left: 20px;
-      margin-bottom: 10px;
-    }
-
-    .slider-container {
-      position: relative;
-      max-width: 100%;
-    }
-
-    .slider-container:hover .nav-btn {
-      opacity: 1;
-    }
-
-    .slider {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 0 20px;
-      gap: 8px;
-      /* Hide scrollbar */
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-    .slider::-webkit-scrollbar {
-      display: none;
-    }
-
-    .card {
-      flex: 0 0 16vw;           /* Adjust width based on viewport */
-      min-width: 180px;         /* Minimum width for small screens */
-      position: relative;
-      border-radius: 4px;
-      overflow: hidden;
-      transition: transform 0.4s ease;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      transform: scale(1.35);
-      z-index: 10;
-    }
-
-    .card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-      padding: 20px 12px 12px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .card:hover .card-info {
-      opacity: 1;
-    }
-
-    .episode-number {
-      font-size: 1.2vw;
-      opacity: 0.8;
-      margin-bottom: 4px;
-    }
-
-    .episode-title {
-      font-size: 1.1vw;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .episode-desc {
-      font-size: 0.9vw;
-      line-height: 1.3;
-      opacity: 0.9;
-    }
-
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6);
-      border: none;
-      color: white;
-      font-size: 3vw;
-      width: 4vw;
-      height: 12vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 20;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 2px;
-    }
-
-    .nav-btn:hover {
-      background: rgba(0, 0, 0, 0.8);
-    }
-
-    .prev {
-      left: 0;
-    }
-
-    .next {
-      right: 0;
-    }
-
-    @media (max-width: 768px) {
-      .card { flex: 0 0 40vw; }
-      .row-title { font-size: 18px; }
-      .nav-btn { font-size: 32px; width: 40px; height: 100px; }
-      .episode-number, .episode-title, .episode-desc { font-size: 14px; }
-    }
-  </style>
-</head>
 <body>
 
-  <h2 class="row-title">Season 1 Episodes</h2>
-  <div class="slider-container">
-    <button class="nav-btn prev" aria-label="Previous">‹</button>
-    
-    <div class="slider" id="episodesSlider">
-      <!-- Episode Card Example - Duplicate as needed -->
-      <div class="card">
-        <img src="https://via.placeholder.com/400x225/111111/FFFFFF?text=Episode+1" alt="Episode 1">
-        <div class="card-info">
-          <div class="episode-number">1</div>
-          <div class="episode-title">Pilot</div>
-          <div class="episode-desc">A young programmer makes a startling discovery that changes everything.</div>
-        </div>
-      </div>
+<!-- HERO -->
+<div class="hero"></div>
 
-      <div class="card">
-        <img src="https://via.placeholder.com/400x225/111111/FFFFFF?text=Episode+2" alt="Episode 2">
-        <div class="card-info">
-          <div class="episode-number">2</div>
-          <div class="episode-title">The Journey Begins</div>
-          <div class="episode-desc">The team faces their first major challenge together.</div>
-        </div>
-      </div>
+<div class="container">
+  <div class="title">MF Ghost</div>
 
-      <!-- Add more cards here (10–20 is typical for a row) -->
-      <!-- Repeat the above block with your real image URLs and episode data -->
-
-    </div>
-    
-    <button class="nav-btn next" aria-label="Next">›</button>
+  <div class="tags">
+    <div class="tag">Anime</div>
+    <div class="tag">Adventure</div>
   </div>
 
-  <script>
-    const slider = document.getElementById('episodesSlider');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
+  <div class="section">
+    <h3>Synopsis</h3>
+    <div class="synopsis">
+      MF Ghost is a high-speed racing anime set in a future where self-driving cars dominate the roads. The story follows Kanata Livington, a young and talented driver who enters the dangerous MFG street racing competition to prove his skills. The anime blends intense racing action, advanced car technology, and emotional storytelling, making it a modern successor to Initial D
+    </div>
+  </div>
 
-    const scrollAmount = slider.querySelector('.card').offsetWidth + 8; // card width + gap
+  <div class="season-bar">
+    <select>
+      <option>S01 (Server 1)</option>
+      <option>S02 (Server 1)</option>
+    </select>
+  </div>
 
-    prevBtn.addEventListener('click', () => {
-      slider.scrollLeft -= scrollAmount * 4; // Scroll ~4 cards at a time
-    });
+  <div class="search">
+    <input type="text" placeholder="Search episode...">
+  </div>
 
-    nextBtn.addEventListener('click', () => {
-      slider.scrollLeft += scrollAmount * 4;
-    });
-  </script>
+  <div class="episodes">
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 1</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
 
-</body>
-</html>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 2</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 3</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 4</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 5</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 6</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 7</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 8</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 9</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 10</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 11</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 12</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 13</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 14</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 15</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 16</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 17</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 18</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 19</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 20</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 21</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 22</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 23</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 24</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 25</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 26</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 27</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 28</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 29</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 30</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 31</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 32</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 33</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 34</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 35</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 36</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="nav">
+  <i>🏠</i>
+  <i class="active">🔍</i>
+  <i>▶</i>
+  <i>⚙</i>
+</div>
+
 </body>
 </html>
