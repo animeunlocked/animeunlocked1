@@ -1,298 +1,778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Hero Academia</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 0 0 80px;
-      background-color: #000;
-      color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anime Player UI</title>
 
-    .header {
-      height: 70vh;
-      min-height: 400px;
-      background-image: url('https://a.storyblok.com/f/178900/900x637/00226f3d07/my-hero-academia-s7-charkv.jpeg');
-      background-size: cover;
-      background-position: center top;
-      position: relative;
-    }
+<style>
+:root{
+  --bg:#000;
+  --card:#2a2a2a;
+  --accent:#ff5a3c;
+  --muted:#9a9a9a;
+  --white:#fff;
+}
 
-    .header::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 30%, #000 100%);
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
 
-    .title-section {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      z-index: 2;
-    }
+body{
+  background:var(--bg);
+  color:var(--white);
+}
 
-    .main-title {
-      font-size: 48px;
-      font-weight: 900;
-      color: #ff4500; /* Orange like the logo */
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-      margin: 0 0 8px;
-      line-height: 1;
-    }
+/* HEADER BANNER */
+.hero{
+  position:relative;
+  height:240px;
+  background:url("https://wallpaperaccess.com/thumb/2933943.png") center/cover no-repeat;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.2), #000 90%);
+}
 
-    .sub-title {
-      font-size: 28px;
-      margin: 0 0 16px;
-    }
+/* CONTENT */
+.container{
+  padding:16px;
+  margin-top:-40px;
+  position:relative;
+  z-index:2;
+}
 
-    .genres {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+.title{
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:8px;
+}
 
-    .genre {
-      background: rgba(255,255,255,0.15);
-      padding: 8px 20px;
-      border-radius: 30px;
-      font-size: 16px;
-    }
+.tags{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+.tag{
+  background:#1c1c1c;
+  padding:6px 14px;
+  border-radius:18px;
+  font-size:13px;
+}
 
-    .content {
-      padding: 20px;
-    }
+/* SYNOPSIS */
+.section{
+  margin-top:16px;
+}
+.section h3{
+  font-size:18px;
+  margin-bottom:6px;
+}
+.synopsis{
+  background:#1c1c1c;
+  padding:14px;
+  border-radius:10px;
+  color:var(--muted);
+  font-size:14px;
+}
 
-    .synopsis {
-      margin-bottom: 30px;
-    }
+/* SEASON BAR */
+.season-bar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:18px;
+}
+select{
+  background:#1c1c1c;
+  color:#ff5a3c;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
+  flex:1;
+}
+.search{
+  width:100%;
+  margin-top:10px;
+}
+.search input{
+  width:100%;
+  background:#1c1c1c;
+  border:none;
+  padding:12px 14px;
+  border-radius:10px;
+  color:#fff;
+  outline:none;
+}
 
-    .synopsis-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+/* EPISODES */
+.episodes{
+  margin-top:16px;
+}
+.episode{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#3a3a3a;
+  border-radius:12px;
+  padding:12px 14px;
+  margin-bottom:12px;
+}
+.play{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.play-btn{
+  width:34px;
+  height:34px;
+  background:var(--accent);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.play-btn::before{
+  content:"▶";
+  color:#000;
+  font-size:14px;
+  margin-left:2px;
+}
+.ep-title{
+  font-size:16px;
+}
+.download{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#555;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
 
-    .synopsis-actions {
-      color: #ff4500;
-    }
-
-    .synopsis-text {
-      background: rgba(255,255,255,0.08);
-      padding: 16px;
-      border-radius: 8px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-
-    .season-selector {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255,255,255,0.08);
-      padding: 16px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #ff4500;
-    }
-
-    .search-bar {
-      display: flex;
-      align-items: center;
-      background: rgba(255,255,255,0.08);
-      padding: 16px;
-      border-radius: 8px;
-      margin-bottom: 30px;
-    }
-
-    .search-bar input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 17px;
-      outline: none;
-    }
-
-    .search-bar input::placeholder {
-      color: rgba(255,255,255,0.6);
-    }
-
-    .search-arrow {
-      font-size: 24px;
-      margin-left: 10px;
-      color: #ff4500;
-    }
-
-    .episode-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .episode-item {
-      display: flex;
-      align-items: center;
-      background: rgba(255,255,255,0.08);
-      padding: 16px;
-      border-radius: 8px;
-    }
-
-    .play-btn {
-      width: 50px;
-      height: 50px;
-      background: #ff4500;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 20px;
-      font-size: 24px;
-    }
-
-    .episode-title {
-      flex: 1;
-      font-size: 18px;
-    }
-
-    .download-btn {
-      font-size: 28px;
-      color: #aaa;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.9);
-      backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 12px 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .nav-item {
-      font-size: 28px;
-      color: rgba(255,255,255,0.6);
-    }
-
-    .nav-item.active {
-      color: #ff4500;
-    }
-  </style>
+/* BOTTOM NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:64px;
+  background:#0c0c0c;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  border-top:1px solid #222;
+}
+.nav i{
+  font-size:22px;
+  color:#aaa;
+}
+.nav .active{
+  color:var(--accent);
+}
+</style>
 </head>
+
 <body>
 
-  <div class="header">
-    <div class="title-section">
-      <h1 class="main-title">MY HERO<br>ACADEMIA</h1>
-      <h2 class="sub-title">My Hero Academia</h2>
-      <div class="genres">
-        <span class="genre">Anime</span>
-        <span class="genre">Action</span>
-      </div>
-    </div>
+<!-- HERO -->
+<div class="hero"></div>
+
+<div class="container">
+  <div class="title">My Hero Academia</div>
+
+  <div class="tags">
+    <div class="tag">Anime</div>
+    <div class="tag">Adventure</div>
   </div>
 
-  <div class="content">
+  <div class="section">
+    <h3>Synopsis</h3>
     <div class="synopsis">
-      <div class="synopsis-header">
-        <span>Synopsis</span>
-        <div class="synopsis-actions">
-          <span style="margin-right: 16px;">🔖</span> ⋯
-        </div>
-      </div>
-      <div class="synopsis-text">
-        No synopsis available
-      </div>
-    </div>
 
-    <div class="season-selector">
-      <span>S07 (Server 1)</span>
-      <span>▼</span>
-    </div>
+My Hero Academia is a popular Japanese anime set in a world where most people are born with superpowers called *Quirks*. The story follows Izuku Midoriya, a powerless boy who dreams of becoming a hero. His life changes when the world’s greatest hero, All Might, chooses him as his successor. The series focuses on hero training, intense battles, friendship, and the journey of becoming a true hero.
 
-    <div class="search-bar">
-      <input type="text" placeholder="Search...">
-      <span class="search-arrow">↓</span>
-    </div>
-
-   <div class="episode-list">
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-       <button><a href="https://displayvertising.com/dbtwndtlrhaeyzvnz?WhbvEmze=BQQiAAAAAAAACZUAAq5_mwC1cDGWj_dfIXbICc5zBU7vqP-bXFs3GF-3d4Anil_wF42gTGV4kazpyV9b7RsJZcwvadlURrK6ABQrB0EpFQ2H2KKYAMX4rNm-zcWcEbFFdzXTyTD63FPYug9qbUxA7FLJplS36C9vuwg_HvmikCYIBgR7ukp3uW8B4-bw3ABaTPOhHu5bh4lJvwmJeIXeYwrmbhWreopuV97ZMkH40PUEO-4SmpSmKnUXpWJucRDXxoYUfXAmkySkpuRHnOxZXHX92-IgrJKm4SpdderkUxiBc9JYmx6PGccYMBVS7L9nGTW6eds9kcbZpPGeYaw-xwHCajrkH00sYmd71RYnclIAG377da_2vwqvJzQnBv8VpNBrif4HKPHer9RF_LeLViV44zB1Myw1fY9F1yH09UO-B80_MRdO86cj2Fde6v_ttl0hpJQ14i85qJm0nPPN5-sb481hJ4TxpGEccaHXSIteKF2FRvp1ByxYMe9Eok_HThrMfPjM2UyGqmOvrE9HzEYfdU2nnk4G0JwbiLVEAVQzk6_eUYdi7YvHAN61UCTq8OkvAMYaGkJSN5RUGAhdjDN3HsI_KEkuPyOAFFU5l3goeHY2mGCNSfgLAmDjiMb4US3_cpmTeVZz0EkiMEswhE2e4voHU9kw9VFU3LNyXM7ZKN6a1lpQRuFXdobe8iOETZX3oFD-ldqNL77bhH4m_5NOVOGgQ4HnYUg4-ze2C68NfACTxvlyMbuhlkP_9pFkXEw-2AdRznYIH4dk2SYAoJ9AtLQHxS_Wrtb95YrnOcWeeH1K8YVbpT1KfgulRq-SPhRDBh1hO2RWb4KF_jPN2yR65ycDyuytQXGXXscVyQ35IxNABV6qZr9ZkTPphw6xYEHEz60nWAimlwmEAW6OPouDGdoIRD9sQ3I2B4SRsSEBMRLezCkH6CbJR3IBaV4sghwi8qhL2NZ8_cXhRvGWZk1g6Wzq8A_2Z2jQOVsjKddzgSh2Hs1Wb6UELAsaXOcxLVoR9KJtSmSKLICT0Qbccp6SmLnt2BMbjOCuQUjeLNwnIF6a8nKkrTQlUIJAUbLEZFyGevulzmFofq8PFrigLdLDTEm20xST5OpNwI-H-ZmVmbU207BFACtr1VchgHwJqXrUrYqa8_RyQjBBn9fG4_gjn7SO60m1r1kX4QvGG8I6hm8Byockpap0jceuwhs11ux3whZA-A4RnWYSfhDeqGX3t0OXGG60JmJZ-Gpseufgdie1MeXPmdBCTFaDWhlZOg2I5AnHeS-W_4B6MTbRbmBMWi6p2FDiHBzQp8Ezx_1xfN5hTkLjClm0zL_lZx5BuphSJjW2KpPkIEJ_K9tOe9tGEMkhixtahqmNAiP2QlW8MlAK-42rkdJAIshXes5f5hOH_YP0HDogGBX0kQ&amp;iAxHdJXt=4&amp;Lbkdwqrs=5256735&amp;VxyYhgOn=&amp;XvLMmzfp=0,0&amp;rNOJctCb=&amp;tsFJIWaP=https%3A%2F%2Fluluvid.com%2Fmgookvo8o86y&amp;xAvbXFfC=1920,1080,1.22,2342.4,1317.6,1"><div class="episode-title">Episode 1</div></a></button>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 2</div>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 3</div>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 4</div>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 5</div>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 6</div>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 7</div>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 8</div>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 9</div>
-        <div class="download-btn"></div>
-      </div>
-      <div class="episode-item">
-        <div class="play-btn">▶</div>
-        <div class="episode-title">Episode 10</div>
-        <div class="download-btn"></div>
-      </div>
-      <!-- Duplicate the .episode-item block for more episodes -->
     </div>
   </div>
 
-  <div class="bottom-nav">
-    <div class="nav-item">🏠</div>
-    <div class="nav-item active">🔍</div>
-    <div class="nav-item">▶</div>
-    <div class="nav-item">⚙</div>
+  <div class="season-bar">
+    
+      <option> (All Season Episodes)</option>
+    
   </div>
+
+  <div class="search">
+    <input type="text" placeholder="Search episode...">
+  </div>
+
+  <div class="episodes">
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 1</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 2</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 3</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 4</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 5</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 6</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 7</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 8</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 9</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 10</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 11</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 12</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 13</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 14</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 15</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 16</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 17</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 18</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 19</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 20</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 21</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 22</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 23</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 24</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 25</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 26</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 27</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 28</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 29</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 30</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 31</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 32</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 33</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 34</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 35</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 36</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 37</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 38</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 39</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 40</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 41</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 42</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 43</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 44</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 45</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 46</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 47</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 48</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 49</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 50</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 51</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 52</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 53</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 54</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 55</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 56</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 57</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 58</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 59</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 60</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 61</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 62</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 63</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 64</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 65</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 66</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 67</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 68</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 69</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 70</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 71</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="nav">
+  <i>🏠</i>
+  <i class="active">🔍</i>
+  <i>▶</i>
+  <i>⚙</i>
+</div>
 
 </body>
-
 </html>
+
