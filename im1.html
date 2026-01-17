@@ -1,125 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .sct-1mysec{
-            position: absolute;
-            width: 15%;
-            height: 50vh;
-            display:none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background: linear-gradient(30deg,rgba(128, 128, 128, 0.295),rgba(211, 211, 211, 0.233));
-            border-radius: 1vh;
-            border: 1px solid black;
-            box-shadow: 0px 0px 20px rgba(211, 211, 211, 0.281);
-            left: 26%;
-            top: 64.5vh;
-        }
-        .opt{
-            width: 100%;
-            height: 4%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: clamp(0.5vh, 1.5vh, 5vh);
-            color: gray;
-            box-shadow: 0px 0px 1px black;
-            transition: .5s;
-        }
-        .opt:hover{
-            width: 100%;
-            height: 4%;
-            transform: translate(10px);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: clamp(0.5vh, 1.5vh, 5vh);
-            color:black;
-            border-radius: 1vh;
-            box-shadow: 0px 0px 1px black;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anime Player UI</title>
+
+<style>
+:root{
+  --bg:#000;
+  --card:#2a2a2a;
+  --accent:#ff5a3c;
+  --muted:#9a9a9a;
+  --white:#fff;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+}
+
+/* HEADER BANNER */
+.hero{
+  position:relative;
+  height:240px;
+  background:url("https://wallpapers.com/images/hd/jujutsu-kaisen-characters-4k-9w9r7k7u3l8g9k5h.jpg") center/cover no-repeat;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.2), #000 90%);
+}
+
+/* CONTENT */
+.container{
+  padding:16px;
+  margin-top:-40px;
+  position:relative;
+  z-index:2;
+}
+
+.title{
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.tags{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+.tag{
+  background:#1c1c1c;
+  padding:6px 14px;
+  border-radius:18px;
+  font-size:13px;
+}
+
+/* SYNOPSIS */
+.section{
+  margin-top:16px;
+}
+.section h3{
+  font-size:18px;
+  margin-bottom:6px;
+}
+.synopsis{
+  background:#1c1c1c;
+  padding:14px;
+  border-radius:10px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* SEASON BAR */
+.season-bar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:18px;
+}
+select{
+  background:#1c1c1c;
+  color:#ff5a3c;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
+  flex:1;
+}
+.search{
+  width:100%;
+  margin-top:10px;
+}
+.search input{
+  width:100%;
+  background:#1c1c1c;
+  border:none;
+  padding:12px 14px;
+  border-radius:10px;
+  color:#fff;
+  outline:none;
+}
+
+/* EPISODES */
+.episodes{
+  margin-top:16px;
+}
+.episode{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#3a3a3a;
+  border-radius:12px;
+  padding:12px 14px;
+  margin-bottom:12px;
+}
+.play{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.play-btn{
+  width:34px;
+  height:34px;
+  background:var(--accent);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.play-btn::before{
+  content:"▶";
+  color:#000;
+  font-size:14px;
+  margin-left:2px;
+}
+.ep-title{
+  font-size:16px;
+}
+.download{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#555;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+/* BOTTOM NAV */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:64px;
+  background:#0c0c0c;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  border-top:1px solid #222;
+}
+.nav i{
+  font-size:22px;
+  color:#aaa;
+}
+.nav .active{
+  color:var(--accent);
+}
+</style>
 </head>
 
-<body bgcolor="black" text="white">
-    <br><br><br>
-    <p style="text-wrap: wrap ;">
-        <img src="jjk.jpg" alt="">
-    <h1>Jujutsu Kaisen</h1><br>
+<body>
 
-    Jujutsu Kaisen is a dark fantasy anime set in a world where cursed spirits are born from negative human emotions.
-    The story follows Yuji Itadori, a high school student who becomes involved in jujutsu sorcery after swallowing a
-    powerful cursed object. Trained by elite sorcerers, he fights deadly curses while struggling with the dangerous
-    power inside him. The anime is known for its intense action, deep characters, and stunning animation.
-    </p>
-    <div style="width: 50%; height: 15vh;display: inline-flex; align-items: center; justify-content: space-around;">
-        
-        <button id="season1" 
-            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
-            1</button>
-            <section class="sct-1mysec" id="section1" >
-                <div class="opt" id="opn1">Episode-1</div>
-                <div class="opt" id="opn2">Episode-2</div>
-                <div class="opt" id="opn3">Episode-3</div>
-                <div class="opt" id="opn4">Episode-4</div>
-                <div class="opt" id="opn5">Episode-5</div>
-                <div class="opt" id="opn6">Episode-6</div>
-                <div class="opt" id="opn7">Episode-7</div>
-                <div class="opt" id="opn8">Episode-8</div>
-                <div class="opt" id="opn9">Episode-9</div>
-                <div class="opt" id="opn10">Episode-10</div>
-                <div class="opt" id="opn11">Episode-11</div>
-                <div class="opt" id="opn12">Episode-12</div>
-                <div class="opt" id="opn13">Episode-13</div>
-                <div class="opt" id="opn14">Episode-14</div>
-                <div class="opt" id="opn15">Episode-15</div>
-                <div class="opt" id="opn16">Episode-16</div>
-                <div class="opt" id="opn17">Episode-17</div>
-                <div class="opt" id="opn18">Episode-18</div>
-                <div class="opt" id="opn19">Episode-19</div>
-                <div class="opt" id="opn20">Episode-20</div>
-                <div class="opt" id="opn21">Episode-21</div>
-                <div class="opt" id="opn22">Episode-22</div>
-                <div class="opt" id="opn23">Episode-23</div>
-                <div class="opt" id="opn24">Episode-24</div>
-                <div class="opt" id="opn25">Episode-25</div>
-            </section>
-        <button
-            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
-            2</button>
-       <button
-            style="box-shadow: 2px 2px 50px gray; height: 5vh;width: 10vh; border: none;cursor: pointer; background: none; border-radius: 1vh; display: inline-flex; align-items:center;justify-content:center;flex-direction:column; gap: .5vh; color: white;">Season
-            3 </button>
-       
+<!-- HERO -->
+<div class="hero"></div>
+
+<div class="container">
+  <div class="title">Jujutsu Kaisen</div>
+
+  <div class="tags">
+    <div class="tag">Anime</div>
+    <div class="tag">Adventure</div>
+  </div>
+
+  <div class="section">
+    <h3>Synopsis</h3>
+    <div class="synopsis">
+      No synopsis available
     </div>
-    <script>
-        document.getElementById("season1").addEventListener("click",()=>{
-            let a = document.getElementById("section1");
-            if(a.style.display=="none"){
-                a.style.display="flex";
-            }else{
-                a.style.display="none";
-            }
-        })
-        
+  </div>
 
-    </script>
+  <div class="season-bar">
+    <select>
+      <option>S01 (Server 1)</option>
+      <option>S02 (Server 1)</option>
+    </select>
+  </div>
+
+  <div class="search">
+    <input type="text" placeholder="Search episode...">
+  </div>
+
+  <div class="episodes">
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 1</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 2</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 3</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+
+    <div class="episode">
+      <div class="play">
+        <div class="play-btn"></div>
+        <div class="ep-title">Episode 4</div>
+      </div>
+      <div class="download">⬇</div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="nav">
+  <i>🏠</i>
+  <i class="active">🔍</i>
+  <i>▶</i>
+  <i>⚙</i>
+</div>
+
 </body>
-
 </html>
