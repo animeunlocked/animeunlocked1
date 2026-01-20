@@ -1,1 +1,184 @@
-grihr
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Your Lie in April</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+        }
+
+        .hero {
+            height: 100vh;
+            background: url("https://wallpaperaccess.com/thumb/176050.jpg") center/cover no-repeat;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), #000 80%);
+        }
+
+        .content {
+            position: absolute;
+            bottom: 90px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .synopsis {
+            background: rgba(30, 30, 30, 0.85);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .synopsis .tag {
+            background: #444;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .synopsis p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .quality {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            background: #111;
+            color: #ff4c4c;
+            border: none;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .play {
+            flex: 1;
+            background: #555;
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        .download {
+            width: 55px;
+            background: #444;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: #000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #222;
+        }
+
+        .bottom-nav i {
+            font-size: 20px;
+            color: #777;
+        }
+
+        .bottom-nav .active {
+            color: #ff4c4c;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="hero">
+        <div class="overlay"></div>
+
+        <div class="content">
+            <h1>  Your Lie in April <span>(2018)</span></h1>
+
+            <div class="synopsis">
+                <span class="tag">Synopsis</span>
+                <p>
+                    Your Lie in April is an emotional music-romance anime about Kousei Arima, a gifted pianist who loses his ability to hear music after a tragedy. His life changes when he meets Kaori Miyazono, a free-spirited violinist who helps him rediscover music, love, and the beauty of living in the present.
+                </p>
+            </div>
+
+            <select class="quality">
+                <option>  Your Lie in April (1080p BluRay)</option>
+                <option>720p HD</option>
+                <option>480p SD</option>
+            </select>
+
+            <div class="buttons">
+
+
+
+                
+                <button class="play">
+                    <i class="fa-solid fa-play"></i> Play
+                </button>
+                <button class="download">
+                    <i class="fa-solid fa-download"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-magnifying-glass active"></i>
+        <i class="fa-solid fa-play"></i>
+        <i class="fa-solid fa-gear"></i>
+    </nav>
+
+    <script src="script.js">document.querySelector(".play").onclick = () => {
+            alert("Play button clicked");
+        };
+
+        document.querySelector(".download").onclick = () => {
+            alert("Download started");
+        };
+    </script>
+</body>
+
+</html>
